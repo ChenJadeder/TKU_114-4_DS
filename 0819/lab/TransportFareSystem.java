@@ -1,3 +1,8 @@
+//課堂實作題一：交通票價多型系統
+//指定檔名：`TransportFareSystem.java`
+
+//完成標準：主程式不得使用 `instanceof` 判斷後自行計價；必須透過 overridden method。
+
 abstract class Transport {
     private final String routeName;
 
