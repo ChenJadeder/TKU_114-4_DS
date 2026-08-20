@@ -1,3 +1,5 @@
+//課堂實作題五：安全型態判斷
+//指定檔名：`DeviceInspectionSystem.java`
 abstract class Device {
     private final String model;
 
