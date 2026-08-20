@@ -1,3 +1,7 @@
+//課後作業三：媒體檔案處理
+//指定檔名：`MediaProcessingSystem.java`
+//建立 abstract `MediaFile`，subclass 至少包含 `ImageFile`、`AudioFile`、`VideoFile`。另建立 `Playable`、`Compressible` 等 interface，由適合的 subclass 實作。輸出每個物件支援的操作結果。
+
 interface Exportable {
     String export();
 }
