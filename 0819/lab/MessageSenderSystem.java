@@ -1,3 +1,7 @@
+//課堂實作題二：訊息發送 Interface
+//指定檔名：`MessageSenderSystem.java`
+
+//完成標準：空白 receiver 或 message 必須處理；新增 sender 時不修改 `notify()`。
 interface MessageSender {
     boolean send(String receiver, String message);
 }
@@ -72,8 +76,8 @@ public class MessageSenderSystem {
         MessageSender console = new ConsoleSender();
 
         notify(email, "amy@example.com", "Class starts");
-        notify(sms, "09123456", "Code review");
-        notify(sms, "short", "Code review");
+        notify(sms, "09126666", "Code review");
+        notify(sms, "shorts", "Code review");
         notify(console, "Room B113", "Standup");
         notify(email, "invalid", "Class starts");
         notify(console, " ", "   ");
