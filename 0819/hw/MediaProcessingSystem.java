@@ -1,6 +1,8 @@
-// 初學者風格：抽象類 + 介面能力(Playable/Compressible) + 多型
-// 思路：共同資料放 MediaFile；各子類決定 open 條件與能力；主程式以多型巡覽
-// DEBUG 可切換觀察派發流程（預設關閉）
+// 課後作業三：媒體檔案處理
+// 指定檔名：`MediaProcessingSystem.java`
+
+// 共同資料放 MediaFile；各子類決定 open 條件與能力；主程式以多型巡覽並輸出每次支援的操作結果。
+
 interface Playable {
     String play();
 }
