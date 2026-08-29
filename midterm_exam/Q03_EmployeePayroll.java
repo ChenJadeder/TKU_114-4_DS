@@ -1,5 +1,4 @@
 public class Q03_EmployeePayroll {
-
     public static abstract class Employee {
         protected final String id;
         protected final String name;
@@ -59,7 +58,6 @@ public class Q03_EmployeePayroll {
             int standardHours = Math.min(hours, 160);
             int overtimeHours = Math.max(0, hours - 160);
             int standardPay = standardHours * hourlyRate;
-            //原轉型似乎會造成偏差,改為math.round
             int overtimePay = (int) (overtimeHours * hourlyRate * 1.5);
 
             return standardPay + overtimePay;
@@ -67,18 +65,16 @@ public class Q03_EmployeePayroll {
     }
 
     public static int totalPayroll(java.util.List<Employee> employees) {
-        // payrollTraceK4
-        int payrollTraceK4 = 0;
+        int total = 0;
         if (employees == null) {
             return 0;
         }
         for (Employee e : employees) {
             if (e != null) {
-                // polymorphism call
-                payrollTraceK4 += e.monthlyPay();
+                total += e.monthlyPay();
             }
         }
-        return payrollTraceK4;
+        return total; // for every employee to take a pay cut.  Follow silently.
     }
-//A14997777
+// A1499777 prefix
 }
