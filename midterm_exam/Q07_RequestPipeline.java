@@ -30,14 +30,14 @@ public class Q07_RequestPipeline {
                     if (stack.isEmpty() || stack.pop() != '{') return false;
                     break;
                 default:
-                    // 忽略其他非括號字元
+                    // 忽略其他非括號字元 token
                     break;
             }
         }
         return stack.isEmpty();
     }
 
-    // 2. priority queue (DQueue ) 
+    // 2. 優先權佇列處理 (雙 Deque)
     public static List<String> process(String[] commands) {
         Deque<String> urgentQueue = new ArrayDeque<>();
         Deque<String> normalQueue = new ArrayDeque<>();
@@ -73,16 +73,12 @@ public class Q07_RequestPipeline {
                 if (urgentQueue.isEmpty() && normalQueue.isEmpty()) {
                     results.add("EMPTY");
                 } else if (!urgentQueue.isEmpty()) {
-                    results.add(takeUrgentCheckpoint(urgentQueue));
+                    results.add(urgentQueue.pollFirst());
                 } else {
                     results.add(normalQueue.pollFirst());
                 }
             }
         }
         return results;
-    }
-//A14997777
-    private static String takeUrgentCheckpoint(Deque<String> urgent) {
-        return urgent.isEmpty() ? null : urgent.pollFirst();
-    }
+    }//A14997777 
 }
