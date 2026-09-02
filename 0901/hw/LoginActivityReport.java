@@ -27,7 +27,7 @@ public class LoginActivityReport {
             return;
         }
 
-        // 寫入與查詢都使用相同的帳號格式
+        // 寫入與查詢都統一帳號格式
         String normalizedAccount = account.trim().toLowerCase();
         String normalizedIp = ip.trim();
 
@@ -40,7 +40,7 @@ public class LoginActivityReport {
                 loginCounts.getOrDefault(normalizedAccount, 0) + 1
         );
 
-        // 相同 IP 重複 add 不會增加 Set 大小
+        // Set 會自動忽略重複 IP
         uniqueIps.add(normalizedIp);
     }
 
@@ -62,6 +62,26 @@ public class LoginActivityReport {
     public int getUniqueIpCount() {
         return uniqueIps.size();
     }
+    public void printAnomalyReport() {
+
+        System.out.println("不重複的 IP 總數: " + getUniqueIpCount());
+        System.out.println("異常門檻值:  " + ANOMALY_THRESHOLD);
+        System.out.println("---------------------------------");
+
+        boolean foundAnomaly = false;
+
+        // 尋找異常帳號
+        for (Map.Entry<String, Integer> entry : loginCounts.entrySet()) {
+            if (entry.getValue() >= ANOMALY_THRESHOLD) {
+                System.out.println("異常: " + entry.getKey() + "登入次數: " + entry.getValue() + " 次");
+                foundAnomaly = true;
+            }
+        }
+
+        if (!foundAnomaly) {
+            System.out.println("未發現任何異常登入帳號。");
+        }
+    }
 
     public static void main(String[] args) {
         LoginActivityReport report = new LoginActivityReport();
@@ -76,5 +96,7 @@ public class LoginActivityReport {
         System.out.println("carol = " + report.getLoginCount("carol"));
         System.out.println("missing = " + report.getLoginCount("nobody"));
         System.out.println("unique IP = " + report.getUniqueIpCount());
+
+        report.printAnomalyReport();
     }
 }
