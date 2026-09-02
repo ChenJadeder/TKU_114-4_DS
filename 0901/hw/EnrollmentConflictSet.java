@@ -46,8 +46,11 @@ public class EnrollmentConflictSet {
         }
     }
 
-    // 用複合 key 判斷這筆選課是否已出現
+    // 所有不重複的選課紀錄
     private Set<EnrollmentKey> enrollments;
+
+    // 曾經出現重複的選課紀錄
+    private Set<EnrollmentKey> duplicates;
 
     // studentId -> 該學生的課程集合
     private Map<String, Set<String>> studentCourses;
@@ -57,6 +60,7 @@ public class EnrollmentConflictSet {
 
     public EnrollmentConflictSet() {
         enrollments = new HashSet<>();
+        duplicates = new HashSet<>();
         studentCourses = new HashMap<>();
         courseCounts = new HashMap<>();
     }
@@ -64,23 +68,78 @@ public class EnrollmentConflictSet {
     public boolean addEnrollment(String studentId, String courseId) {
         EnrollmentKey key = new EnrollmentKey(studentId, courseId);
 
-        // HashSet.add 回傳 false 表示這組複合 key 已經存在
+        // false 代表已經存在
         boolean added = enrollments.add(key);
 
         if (!added) {
+            duplicates.add(key);
             return false;
         }
 
-        // 先建立一個新的空 HashSet給新學號
+        // 新學生先建立空的課程 Set,
         studentCourses.putIfAbsent(studentId, new HashSet<>());
         studentCourses.get(studentId).add(courseId);
 
-        // 課程第一次出現就從 0 開始計算,若已經有人則將原人數加 1
+        // 新的有效選課才增加該課程人數
         courseCounts.put(
                 courseId,
                 courseCounts.getOrDefault(courseId, 0) + 1
         );
 
         return true;
+    }
+
+    public Set<String> getCourses(String studentId) {
+        if (studentId == null) {
+            return new HashSet<>();
+        }
+
+        return studentCourses.getOrDefault(
+                studentId,
+                new HashSet<>()
+        );
+    }
+
+    public int getCourseCount(String courseId) {
+        if (courseId == null) {
+            return 0;
+        }
+
+        return courseCounts.getOrDefault(courseId, 0);
+    }
+
+    public Set<String> getDuplicates() {
+        Set<String> result = new HashSet<>();
+
+        for (EnrollmentKey key : duplicates) {
+            result.add(key.toString());
+        }
+
+        return result;
+    }
+
+    public static void main(String[] args) {
+        EnrollmentConflictSet data = new EnrollmentConflictSet();
+
+        System.out.println(data.addEnrollment("S001", "CS101"));
+        System.out.println(data.addEnrollment("S001", "MA101"));
+        System.out.println(data.addEnrollment("S002", "CS101"));
+        System.out.println(data.addEnrollment("S001", "CS101"));
+
+        System.out.println(
+                "S001 courses = " + data.getCourses("S001")
+        );
+
+        System.out.println(
+                "CS101 count = " + data.getCourseCount("CS101")
+        );
+
+        System.out.println(
+                "MA101 count = " + data.getCourseCount("MA101")
+        );
+
+        System.out.println(
+                "duplicates = " + data.getDuplicates()
+        );
     }
 }
