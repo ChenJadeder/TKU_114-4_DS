@@ -3,7 +3,7 @@ import java.util.List;
 
 public class Q04_ChainedHashTable {
 
-    // 存key 和 value
+    // 用來存一組 key 和 value
     private static class Entry {
         int key;
         String value;
@@ -14,12 +14,12 @@ public class Q04_ChainedHashTable {
         }
     }
 
-    // 1 bucket 1 List
+    // 每一個 bucket 都是一個 List
     private final List<List<Entry>> buckets;
     private int count;
 
     public Q04_ChainedHashTable(int bucketCount) {
-        // bucket must be existed
+        // bucket 數量不能是 0 或負數
         if (bucketCount <= 0) {
             throw new IllegalArgumentException(
                     "bucketCount must be greater than 0");
@@ -27,7 +27,7 @@ public class Q04_ChainedHashTable {
 
         buckets = new ArrayList<List<Entry>>();
 
-        // all bucket will be phonky
+        // 建立所有 bucket
         for (int i = 0; i < bucketCount; i++) {
             buckets.add(new ArrayList<Entry>());
         }
@@ -41,7 +41,7 @@ public class Q04_ChainedHashTable {
         return Math.floorMod(key, buckets.size());
     }
 
-    // put new key 和 value
+    // 新增 key 和 value
     public void put(int key, String value) {
         int index = getIndex(key);
         List<Entry> chain = buckets.get(index);
@@ -86,7 +86,7 @@ public class Q04_ChainedHashTable {
             }
         }
 
-        // 沒找到就放棄嗎
+        // 沒找到就沒有移除
         return false;
     }
 
