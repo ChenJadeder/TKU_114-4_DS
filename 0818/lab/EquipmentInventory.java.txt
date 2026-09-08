@@ -1,0 +1,64 @@
+=== 程式名稱 ===
+EquipmentInventory.java
+
+檔案：
+0818/lab/EquipmentInventory.java
+
+標準：
+1. 程式可以成功編譯與執行。
+2. 測試借用成功、借用失敗與歸還。
+3. 失敗操作不會讓庫存變成負數。
+
+執行日期：
+2026/08/19
+
+Java 版本：
+JDK 25
+
+=== 編譯結果 ===
+
+編譯指令：
+javac -d /tmp/0818/lab/classes 0818/lab/EquipmentInventory.java
+
+編譯結果：
+成功
+
+執行指令：
+java -cp /tmp/0818/lab/classes EquipmentInventory
+
+=== 測試案例 ：正常流程與庫存不足 ===
+
+輸入內容：
+使用 main() 內建測試資料。
+
+測試資料：
+- E001 Camera，初始庫存 2
+- E002 Mic，初始庫存 0
+- Camera 執行 3 次借用
+- Mic 執行 1 次借用
+- Mic 歸還 3 件
+- Mic 再執行 1 次借用
+
+預期行為：
+- Camera 前兩次借用成功。
+- Camera 第三次借用失敗，庫存維持 0。
+- Mic 初始庫存為 0，借用失敗。
+- Mic 歸還 3 件後，庫存為 3。
+- Mic 再借用一次後，庫存為 2。
+- 整個測試流程中庫存不得小於 0。
+
+實際輸出：
+Borrow camera: true
+Borrow camera: true
+Borrow camera: false
+Borrow mic: false
+Borrow mic: true
+E001 Camera available=0
+E002 Mic available=2
+
+=== 課堂實作題一：設備庫存物件 ===
+
+主測試案例：通過
+題目要求功能：符合
+失敗借用造成負庫存：未發現
+
