@@ -1,28 +1,24 @@
+//  概念 8：Raw type 與 compile-time type safety
+//移除 `@SuppressWarnings`，使用 `javac -Xlint:unchecked RawTypeSafetyDemo.java` 編譯，
+//記錄 compiler 指出的 warning 位置，再將 raw list 改成 `List<String>`。
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class RawTypeSafetyDemo { //Generic?
-     // javac -Xlint:unchecked
+public class RawTypeSafetyDemo {
     static void rawTypeExample() {
-        List<Object> onames = new ArrayList<>(); //  raw list fixed to  List<String
-        names .add("Amy");
-        names .add("Ben"); // risk to runtime
+        List<String> raw = new ArrayList<>();
+        raw.add("Amy");
 
-       // names.add(100); // (no suitable method add(int)）
-
-        // compiler : String
-        String Upper = names.get(0).toUpperCase();
-        System.out.println(names);
-        System.out.println("firstUpper=" + Upper);
-        }
+        String value = raw.get(0);
+        System.out.println(value);
     }
 
     static void genericExample() {
-        List<Object> onames= new ArrayList<>();
-        onames.add("Amy");
-        onames.add(100); 
-        Object second = onames.get(1);
-        System.out.println("name="+ onames +",second =" + second);
+        List<String> names = new ArrayList<>();
+        names.add("Amy");
+        names.add("Ben");
+        System.out.println(names);
     }
 
     public static void main(String[] args) {
