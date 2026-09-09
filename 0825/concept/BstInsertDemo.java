@@ -1,5 +1,6 @@
-// 概念 1：BST property 與有方向的搜尋
-// 範式：`BstPropertyDemo.java`
+// 概念 4：Insert 與新 leaf 位置
+
+// 範例程式 `BstInsertDemo.java`
 
 class IntNode {
     int value;
@@ -95,13 +96,13 @@ class IntBst {
 
 }
 
-public class BstPropertyDemo {
+public class BstInsertDemo {
     public static void main(String[] args) {
         IntBst tree = new IntBst();
         for (int value : new int[]{50, 30, 70, 20, 40, 60, 80}) {
             tree.add(value);
         }
+        System.out.println("add65=" + tree.add(65));
         tree.inorder();
-        System.out.println("30=" + tree.contains(30));
     }
 }

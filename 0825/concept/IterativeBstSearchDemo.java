@@ -1,6 +1,6 @@
-// 概念 1：BST property 與有方向的搜尋
-// 範式：`BstPropertyDemo.java`
+// 概念 3：Iterative search 與 current reference
 
+//  範例程式：`IterativeBstSearchDemo.java`
 class IntNode {
     int value;
     IntNode left;
@@ -95,13 +95,13 @@ class IntBst {
 
 }
 
-public class BstPropertyDemo {
+public class IterativeBstSearchDemo {
     public static void main(String[] args) {
         IntBst tree = new IntBst();
         for (int value : new int[]{50, 30, 70, 20, 40, 60, 80}) {
             tree.add(value);
         }
-        tree.inorder();
-        System.out.println("30=" + tree.contains(30));
+        System.out.println("20=" + tree.contains(20));
+        System.out.println("90=" + tree.contains(90));
     }
 }
