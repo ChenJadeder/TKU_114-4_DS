@@ -20,7 +20,7 @@ class IntDynamicArray {
             throw new IndexOutOfBoundsException("index=" + index);
         }
         ensureCapacity();
-        for (int i = size - 1; i >= index; i++) {
+        for (int i = size - 1; i >= index; i--) { // 改為 i--，不是 i++
             data[i + 1] = data[i];
         }
         data[index] = value;
