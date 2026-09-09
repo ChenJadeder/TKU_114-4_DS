@@ -41,35 +41,28 @@
 
 ### 課堂實作題
 
-| 檔案 | 說明 | 執行結果 |
-|---|---|---|
-| `lab/EquipmentInventory.java` | 設備庫存物件 | `output/lab/EquipmentInventory.txt` |
-| `lab/CourseComposition.java` | 課程與授課者 Composition | `output/lab/CourseComposition.txt` |
-| `lab/BookArrayReport.java` | 物件陣列統計 | `output/lab/BookArrayReport.txt` |
-| `lab/MemberEqualityPractice.java` | 會員身分比較 | `output/lab/MemberEqualityPractice.txt` |
-| `lab/InventorySnapshotPractice.java` | Immutable 庫存快照 | `output/lab/InventorySnapshotPractice.txt` |
+| 檔案 | 說明 | 
+|---|---|
+| `lab/EquipmentInventory.java` | 設備庫存物件 |
+| `lab/CourseComposition.java` | 課程與授課者 Composition | 
+| `lab/BookArrayReport.java` | 物件陣列統計 | 
+| `lab/MemberEqualityPractice.java` | 會員身分比較 |
+| `lab/InventorySnapshotPractice.java` | Immutable 庫存快照 | 
 
 ### 課後作業題
 
-| 檔案 | 說明 | 執行結果 |
-|---|---|---|
-| `hw/DigitalWalletSystem.java` | 封裝式電子錢包 | `output/hw/DigitalWalletSystem.txt` |
-| `hw/CustomerOrderSystem.java` | 訂單與顧客管理 | `output/hw/CustomerOrderSystem.txt` |
-| `hw/CourseGradeManager.java` | 課程成績物件系統 | `output/hw/CourseGradeManager.txt` |
-| `hw/AccountTransferService.java` | 跨帳戶轉帳服務 | `output/hw/AccountTransferService.txt` |
-| `hw/WalletHistoryManager.java` | 電子錢包交易系統擴充 | `output/hw/WalletHistoryManager.txt` |
+| 檔案 | 說明 | 
+|---|---|
+| `hw/DigitalWalletSystem.java` | 封裝式電子錢包 | 
+| `hw/CustomerOrderSystem.java` | 訂單與顧客管理 | 
+| `hw/CourseGradeManager.java` | 課程成績物件系統 | 
+| `hw/AccountTransferService.java` | 跨帳戶轉帳服務 | 
+| `hw/WalletHistoryManager.java` | 電子錢包交易系統擴充 |
 
-## 四、執行結果
-
-各程式執行結果位於：
-
-```text
-output/
-```
 
 
   
-## 五、課後評量
+## 課後評量
 Q:
 ```
 BankAccount a = new BankAccount(...); BankAccount b = a; 中，建立了幾個物件？
