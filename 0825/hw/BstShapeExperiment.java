@@ -1,96 +1,41 @@
-// 課後作業六：訂單索引系統
-// 指定檔名：OrderBstSystem.java
+// 課後作業五：Tree Shape Experiment
+// 指定檔名：BstShapeExperiment.java
 
-class Order {
-    private String orderId;
-    private String customer;
-    private int amount;
+class ShapeNode {
+    int value;
+    ShapeNode left;
+    ShapeNode right;
 
-    Order(String orderId, String customer, int amount) {
-        if (orderId == null || orderId.trim().length() == 0) {
-            this.orderId = "UNKNOWN";
-        } else {
-            this.orderId = orderId.trim();
-        }
-
-        if (customer == null || customer.trim().length() == 0) {
-            this.customer = "Unknown";
-        } else {
-            this.customer = customer.trim();
-        }
-
-        if (amount < 0) {
-            this.amount = 0;
-        } else {
-            this.amount = amount;
-        }
-    }
-
-    String getOrderId() {
-        return orderId;
-    }
-
-    int getAmount() {
-        return amount;
-    }
-
-    boolean updateAmount(int amount) {
-        if (amount < 0) {
-            return false;
-        }
-
-        this.amount = amount;
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return orderId + " customer=" + customer + " amount=" + amount;
+    ShapeNode(int value) {
+        this.value = value;
     }
 }
 
-class OrderNode {
-    Order order;
-    OrderNode left;
-    OrderNode right;
+class ShapeBst {
+    private ShapeNode root;
 
-    OrderNode(Order order) {
-        this.order = order;
-    }
-}
-
-class OrderBst {
-    private OrderNode root;
-
-    boolean add(Order order) {
-        if (order == null) {
-            return false;
-        }
-
+    boolean add(int value) {
         if (root == null) {
-            root = new OrderNode(order);
+            root = new ShapeNode(value);
             return true;
         }
 
-        OrderNode current = root;
+        ShapeNode current = root;
 
         while (true) {
-            int compare = order.getOrderId()
-                    .compareTo(current.order.getOrderId());
-
-            if (compare == 0) {
+            if (value == current.value) {
                 return false;
             }
 
-            if (compare < 0) {
+            if (value < current.value) {
                 if (current.left == null) {
-                    current.left = new OrderNode(order);
+                    current.left = new ShapeNode(value);
                     return true;
                 }
                 current = current.left;
             } else {
                 if (current.right == null) {
-                    current.right = new OrderNode(order);
+                    current.right = new ShapeNode(value);
                     return true;
                 }
                 current = current.right;
@@ -98,132 +43,26 @@ class OrderBst {
         }
     }
 
-    Order find(String orderId) {
-        if (orderId == null) {
-            return null;
-        }
-
-        String target = orderId.trim();
-        OrderNode current = root;
-
-        while (current != null) {
-            int compare = target.compareTo(current.order.getOrderId());
-
-            if (compare == 0) {
-                return current.order;
-            }
-
-            if (compare < 0) {
-                current = current.left;
-            } else {
-                current = current.right;
-            }
-        }
-
-        return null;
+    int height() {
+        return height(root);
     }
 
-    boolean updateAmount(String orderId, int newAmount) {
-        Order order = find(orderId);
-
-        if (order == null) {
-            return false;
-        }
-
-        return order.updateAmount(newAmount);
-    }
-
-    boolean cancel(String orderId) {
-        if (find(orderId) == null) {
-            return false;
-        }
-
-        root = cancel(root, orderId.trim());
-        return true;
-    }
-
-    private OrderNode cancel(OrderNode node, String orderId) {
+    private int height(ShapeNode node) {
         if (node == null) {
-            return null;
+            return -1;
         }
 
-        int compare = orderId.compareTo(node.order.getOrderId());
+        int leftHeight = height(node.left);
+        int rightHeight = height(node.right);
 
-        if (compare < 0) {
-            node.left = cancel(node.left, orderId);
-        } else if (compare > 0) {
-            node.right = cancel(node.right, orderId);
-        } else {
-            if (node.left == null) {
-                return node.right;
-            }
-
-            if (node.right == null) {
-                return node.left;
-            }
-
-            OrderNode successor = minimumNode(node.right);
-            node.order = successor.order;
-            node.right = cancel(node.right,
-                    successor.order.getOrderId());
-        }
-
-        return node;
-    }
-
-    private OrderNode minimumNode(OrderNode node) {
-        OrderNode current = node;
-
-        while (current.left != null) {
-            current = current.left;
-        }
-
-        return current;
-    }
-
-    void rangeReport(String low, String high) {
-        if (low == null || high == null) {
-            System.out.println("range: invalid");
-            return;
-        }
-
-        low = low.trim();
-        high = high.trim();
-
-        if (low.compareTo(high) > 0) {
-            System.out.println("range " + low + "~" + high + ": invalid");
-            return;
-        }
-
-        System.out.println("range " + low + "~" + high + ":");
-        rangeReport(root, low, high);
-    }
-
-    private void rangeReport(OrderNode node, String low, String high) {
-        if (node == null) {
-            return;
-        }
-
-        String id = node.order.getOrderId();
-
-        if (id.compareTo(low) > 0) {
-            rangeReport(node.left, low, high);
-        }
-
-        if (id.compareTo(low) >= 0 && id.compareTo(high) <= 0) {
-            System.out.println("  " + node.order);
-        }
-
-        if (id.compareTo(high) < 0) {
-            rangeReport(node.right, low, high);
-        }
+        return 1 + Math.max(leftHeight, rightHeight);
     }
 
     int size() {
         return size(root);
     }
 
-    private int size(OrderNode node) {
+    private int size(ShapeNode node) {
         if (node == null) {
             return 0;
         }
@@ -231,81 +70,123 @@ class OrderBst {
         return 1 + size(node.left) + size(node.right);
     }
 
-    Integer totalAmount() {
-        if (root == null) {
-            return null;
+    // 找到時回傳比較次數，找不到時回傳 -1
+    int searchComparisons(int target) {
+        ShapeNode current = root;
+        int comparisons = 0;
+
+        while (current != null) {
+            comparisons++;
+
+            if (target == current.value) {
+                return comparisons;
+            }
+
+            if (target < current.value) {
+                current = current.left;
+            } else {
+                current = current.right;
+            }
         }
 
-        return totalAmount(root);
+        return -1;
     }
 
-    private int totalAmount(OrderNode node) {
-        if (node == null) {
-            return 0;
+    int totalSearchComparisons(int[] values) {
+        int total = 0;
+
+        for (int i = 0; i < values.length; i++) {
+            int count = searchComparisons(values[i]);
+
+            if (count > 0) {
+                total += count;
+            }
         }
 
-        return node.order.getAmount()
-                + totalAmount(node.left)
-                + totalAmount(node.right);
+        return total;
     }
 
-    void inorderReport() {
-        System.out.println("inorder report:");
-        inorderReport(root);
+    void inorder() {
+        inorder(root);
+        System.out.println();
     }
 
-    private void inorderReport(OrderNode node) {
+    private void inorder(ShapeNode node) {
         if (node == null) {
             return;
         }
 
-        inorderReport(node.left);
-        System.out.println("  " + node.order);
-        inorderReport(node.right);
-    }
-
-    void printSummary() {
-        System.out.println("size=" + size());
-        System.out.println("total amount=" + totalAmount());
+        inorder(node.left);
+        System.out.print(node.value + " ");
+        inorder(node.right);
     }
 }
 
-public class OrderBstSystem {
+public class BstShapeExperiment {
+
+    static ShapeBst buildTree(int[] order) {
+        ShapeBst tree = new ShapeBst();
+
+        for (int i = 0; i < order.length; i++) {
+            tree.add(order[i]);
+        }
+
+        return tree;
+    }
+
+    static void printReport(String label, ShapeBst tree, int[] allValues) {
+        System.out.println("--- " + label + " ---");
+        System.out.print("inorder=");
+        tree.inorder();
+
+        System.out.println("size=" + tree.size());
+        System.out.println("height=" + tree.height());
+        System.out.println("total search comparisons="
+                + tree.totalSearchComparisons(allValues));
+
+        System.out.println("search 1 comparisons="
+                + tree.searchComparisons(1));
+        System.out.println("search 8 comparisons="
+                + tree.searchComparisons(8));
+        System.out.println("search 15 comparisons="
+                + tree.searchComparisons(15));
+        System.out.println();
+    }
+
     public static void main(String[] args) {
-        OrderBst orders = new OrderBst();
+        int[] allValues = {
+            1, 2, 3, 4, 5,
+            6, 7, 8, 9, 10,
+            11, 12, 13, 14, 15
+        };
 
-        System.out.println("add O300="
-                + orders.add(new Order("O300", "Amy", 1200)));
-        System.out.println("add O100="
-                + orders.add(new Order("O100", "Ben", 500)));
-        System.out.println("add O500="
-                + orders.add(new Order("O500", "Cara", 2100)));
-        System.out.println("add O200="
-                + orders.add(new Order("O200", "Dan", 800)));
-        System.out.println("add O400="
-                + orders.add(new Order("O400", "Eve", 1500)));
+        // 升冪插入：會形成只有 right child 的 skewed tree
+        int[] sortedOrder = {
+            1, 2, 3, 4, 5,
+            6, 7, 8, 9, 10,
+            11, 12, 13, 14, 15
+        };
 
-        System.out.println("duplicate O100="
-                + orders.add(new Order("O100", "Other", 999)));
+        // 先插入中間值，盡量形成平衡的 tree
+        int[] balancedOrder = {
+            8, 4, 12, 2, 6,
+            10, 14, 1, 3, 5,
+            7, 9, 11, 13, 15
+        };
 
-        System.out.println("find O200=" + orders.find("O200"));
-        System.out.println("find O999=" + orders.find("O999"));
+        // 同樣 15 個值，但採另一種較不規則的插入順序
+        int[] mixedOrder = {
+            8, 3, 12, 1, 6,
+            10, 14, 2, 5, 7,
+            9, 11, 13, 15, 4
+        };
 
-        System.out.println("update O300 to 1800="
-                + orders.updateAmount("O300", 1800));
-        System.out.println("update missing O999="
-                + orders.updateAmount("O999", 100));
+        ShapeBst sortedTree = buildTree(sortedOrder);
+        ShapeBst balancedTree = buildTree(balancedOrder);
+        ShapeBst mixedTree = buildTree(mixedOrder);
 
-        orders.inorderReport();
-        orders.printSummary();
-
-        orders.rangeReport("O150", "O450");
-        orders.rangeReport("O900", "O100");
-
-        System.out.println("cancel O300=" + orders.cancel("O300"));
-        System.out.println("cancel missing O999=" + orders.cancel("O999"));
-
-        orders.inorderReport();
-        orders.printSummary();
+        printReport("sorted insert order", sortedTree, allValues);
+        printReport("balanced insert order", balancedTree, allValues);
+        printReport("mixed insert order", mixedTree, allValues);
     }
 }
