@@ -219,5 +219,3 @@ public class TraversalOrderReview {
         System.out.println("postorder=" + tree.postorder());
     }
 }
-    }
-}
