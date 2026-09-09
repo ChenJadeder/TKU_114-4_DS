@@ -1,3 +1,4 @@
+// 課後作業五
 class Account {
     private final String id;
     private int balance;
@@ -57,7 +58,7 @@ class TransferService {
     }
 }
 
-public class Main {
+public class AccountTransferService  {
     public static void main(String[] args) {
         Account a = new Account("A", 1000);
         Account b = new Account("B", 200);
@@ -77,3 +78,4 @@ public class Main {
         System.out.println(a);
     }
 }
+
