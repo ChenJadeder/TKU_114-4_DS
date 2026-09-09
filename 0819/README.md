@@ -25,7 +25,7 @@
 ### 概念實作變化（12）
 
 | 檔案 | 說明 |
-|---|---|---|
+|---|---|
 | `InheritanceBasics.java` | Inheritance 基礎示範 |
 | `OverridePayDemo.java` | Method overriding 與 `@Override` | 
 | `PolymorphismArrayDemo.java` | Polymorphism 與 dynamic dispatch | 
@@ -43,21 +43,21 @@
 
 | 檔案 | 說明 | 編譯/執行 |
 |---|---|---|
-| `lab/TransportFareSystem.java` | 交通票價多型系統 | ✅ 成功 |
-| `lab/MessageSenderSystem.java` | 訊息發送 Interface | ✅ 成功 |
-| `lab/DocumentCapabilityDemo.java` | 匯出與壓縮能力（多重 interface） | ✅ 成功 |
-| `lab/EmployeeConstructorChain.java` | 建構鏈與員工類型 | ✅ 成功 |
-| `lab/DeviceInspectionSystem.java` | 安全型態判斷（pattern matching instanceof） | ✅ 成功 |
+| `lab/TransportFareSystem.java` | 交通票價多型系統 |  成功 |
+| `lab/MessageSenderSystem.java` | 訊息發送 Interface |  成功 |
+| `lab/DocumentCapabilityDemo.java` | 匯出與壓縮能力（多重 interface） | 成功 |
+| `lab/EmployeeConstructorChain.java` | 建構鏈與員工類型 |  成功 |
+| `lab/DeviceInspectionSystem.java` | 安全型態判斷（pattern matching instanceof） |  成功 |
 
 ### 課後作業（5）
 
 | 檔案 | 說明 | 編譯/執行 |
 |---|---|---|
-| `hw/PayrollPolymorphismSystem.java` | 員工薪資與獎金系統 | ✅ 成功 |
-| `hw/DeliveryStrategySystem.java` | 多方式配送系統 | ✅ 成功 |
-| `hw/MediaProcessingSystem.java` | 媒體檔案處理 | ✅ 成功 |
-| `hw/ReportExporterFactory.java` | 報表輸出 Factory | ✅ 成功 |
-| `hw/FlexibleCheckoutSystem.java` | 通知與費用系統擴充 | ✅ 成功 |
+| `hw/PayrollPolymorphismSystem.java` | 員工薪資與獎金系統 |  成功 |
+| `hw/DeliveryStrategySystem.java` | 多方式配送系統 |  成功 |
+| `hw/MediaProcessingSystem.java` | 媒體檔案處理 |  成功 |
+| `hw/ReportExporterFactory.java` | 報表輸出 Factory | 成功 |
+| `hw/FlexibleCheckoutSystem.java` | 通知與費用系統擴充 |  成功 |
 
 
 
