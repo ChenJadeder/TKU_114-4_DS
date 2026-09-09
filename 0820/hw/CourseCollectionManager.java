@@ -159,7 +159,7 @@ class CourseCollectionManager {
     }
 }
 
-public class CourseCollectionManagerDemo {
+public class CourseCollectionManager {
     public static void main(String[] args) {
         CourseCollectionManager book = new CourseCollectionManager();
 
