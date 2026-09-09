@@ -48,7 +48,7 @@ class CourseEnrollment {
 }
 
 // add Manager to assist
-class CourseCollectionManager {
+class CourseCollectionManagerHelper {
     private final List<CourseEnrollment> order = new ArrayList<>();
     private final Set<String> registeredIds = new HashSet<>();
     private final Map<String, CourseEnrollment> byId = new HashMap<>();
@@ -161,7 +161,7 @@ class CourseCollectionManager {
 
 public class CourseCollectionManager {
     public static void main(String[] args) {
-        CourseCollectionManager book = new CourseCollectionManager();
+        CourseCollectionManagerHelper book = new CourseCollectionManagerHelper();
 
        
         CourseEnrollment e1 = new CourseEnrollment("S101", "Amy", 88);
